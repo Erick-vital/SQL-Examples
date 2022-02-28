@@ -18,8 +18,8 @@ import mysql.connector
 try:
     conn = mysql.connector.connect(host='localhost',
                                    database='python_db',
-                                   user='pynative',
-                                   password='pynative@#29')
+                                   user='root',
+                                   password='1234')
 
     conn.autocommit = False
     cursor = conn.cursor()
