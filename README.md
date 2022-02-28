@@ -1,2 +1,8 @@
-## Conceptos de SQL con codigo de ejemplo en python
-en este repo se explicaran los conceptos de 
+## Conceptos de SQL con codigo 
+en este repo se explicaran los conceptos SQL siguientes:
+
+- Transacciones
+- Triggers
+- Procedimiento / Funciones
+- Integridad referencial
+- Diagrama Entidad -Relación
