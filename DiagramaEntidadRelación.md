@@ -1,4 +1,4 @@
-## DiagramaEntidad Relación
+## Diagrama Entidad Relación
 El modelo entidad relación (E-R) es un modelo de datos que fue desarrollado para facilitar el diseño de las bases de datos, 
 ya que permite la creación de un esquema que representa la estructura global lógica de la base de datos. Es un modelo semántico porque representa el significado de los datos. El modelo E-R emplea tres conceptos básicos: 
 conjuntos de entidades, conjuntos de relaciones y atributos.
