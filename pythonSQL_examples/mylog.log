@@ -1,0 +1,15 @@
+2022-03-01 20:36:37,623 INFO     conexion a la DB establecida: 8.0.28-0ubuntu0.20.04.3
+2022-03-01 20:36:37,624 INFO     You're connected to database: ('BANCO',)
+2022-03-01 20:36:37,638 INFO     datos insertados
+2022-03-01 20:36:37,639 INFO     datos insertados
+2022-03-01 20:36:37,640 INFO     datos insertados
+2022-03-01 20:36:37,641 INFO     datos insertados
+2022-03-01 20:36:37,642 INFO     datos insertados
+2022-03-01 20:36:37,643 INFO     datos insertados
+2022-03-01 20:36:37,643 INFO     datos insertados
+2022-03-01 20:36:37,644 INFO     datos insertados
+2022-03-01 20:36:37,645 INFO     datos insertados
+2022-03-01 20:36:37,646 INFO     datos insertados
+2022-03-01 20:36:37,647 INFO     datos insertados
+2022-03-01 20:36:37,647 ERROR    error al conectar a la db: 1048 (23000): Column 'first_name' cannot be null
+2022-03-01 20:36:37,648 INFO     la conexion a la db se ha cerrado
