@@ -9,6 +9,10 @@ import os
 import mysql.connector
 from mysql.connector import Error
 from conexion import ConexionDB
+# peticiones
+import requests
+#json
+import json
 
 load_dotenv()
 c = ConexionDB()
@@ -30,6 +34,7 @@ def dropdb():
 
 @cli.command()
 def consultaRegistros():
+
     cursor = c.conexion.cursor()
     query = "select * from BANCO.ClienteBanco"
     cursor.execute(query)
@@ -42,8 +47,34 @@ def consultaRegistros():
         print("Name = ", row[1])
         print("Price  = ", row[2])
         print("Purchase date  = ", row[3], "\n")
-    click.echo('Dropped the database')
 
+
+@cli.command()
+def ordenarPorNombre():
+
+    cursor = c.conexion.cursor()
+    query = "select * from BANCO.ClienteBanco order by first_name"
+    cursor.execute(query)
+
+    records = cursor.fetchall()
+    
+    print("Ordena los nombres de forma alfabetica")
+    for row in records:
+        print('nombre', row[1], '\n')
+
+@cli.command()
+def insertarDatosDummy():
+    r = requests.get('https://api.mockaroo.com/api/deb00080?count=10&key=fad71d20')
+    y = json.loads(r.text)
+    cursor = c.conexion.cursor()
+    
+    for i in range(0, len(y) - 1):
+        cursor.callproc('insertar_cliente', args=(y[i]['first_name'], y[i]['last_name'], y[i]['email'], y[i]['gender'], y[i]['ip_address']))
+        c.conexion.commit()
+        logging.info("datos insertados")
+        print(y[i]['first_name'])
+    print(y[0]['first_name'])
+    print(y)
 
 if __name__ == '__main__':
     cli()

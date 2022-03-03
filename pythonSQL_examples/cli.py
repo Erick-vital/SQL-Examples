@@ -20,6 +20,7 @@ logging.basicConfig(
 
 load_dotenv()
 
+#inserta datos a traves de un excel
 @click.command()
 @click.option('--filename', type=click.Path(exists=True), help='ruta del archivo')
 def file(filename):

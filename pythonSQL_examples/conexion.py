@@ -37,11 +37,10 @@ class ConexionDB:
 
     def cerrar_conexion(self):
         if self.conexion.is_connected():
-            self.cursor.close()
-            self.conexion.close()
-            logging.info('la conexion a la db se ha cerrado')
+            try:
+                self.cursor.close()
+                self.conexion.close()
+                logging.info('la conexion a la db se ha cerrado')
+            except Error as es:
+                logging.error(f'error al cerrar: {e}')
     
-
-c = ConexionDB()
-c.iniciar_conexion()
-c.cerrar_conexion()
