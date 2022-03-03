@@ -4,6 +4,10 @@ Actualmente se usan todas las librerias que tenian que ser probadas de python
 ### instalacion:
 - descargar el proyecto y llenar las variables de entorno con tu base de datos
 - crear tabla ClienteBanco con los mismos campos que te da un usuario de prueba en mockaro, ya que usaremos a este para sacar los datos
+- crear entorno virtual e instalar librerias de requerimientos
+```
+pip install -r requirements.txt
+```
 
 ### uso:
 puedes usar el proyecto mediante comandos
