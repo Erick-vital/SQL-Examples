@@ -21,7 +21,7 @@ class ConexionDB:
         )
         self.cursor = self.conexion.cursor()
 
-    def iniciar_conexion(self):
+    def probar_conexion(self):
         try:
 
             if self.conexion.is_connected():
@@ -41,6 +41,32 @@ class ConexionDB:
                 self.cursor.close()
                 self.conexion.close()
                 logging.info('la conexion a la db se ha cerrado')
-            except Error as es:
+            except Error as e:
                 logging.error(f'error al cerrar: {e}')
+
+    def query(self, sql):
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+    
+    def crear_tabla(self):
+        try:
+            self.cursor.execute("""
+            CREATE TABLE ClienteBanco (
+                `ID` int NOT NULL AUTO_INCREMENT,
+                `first_name` varchar(50) NOT NULL,
+                `last_name` varchar(50) DEFAULT NULL,
+                `email` varchar(60) DEFAULT NULL,
+                `gender` varchar(60) DEFAULT NULL,
+                `ip_address` varchar(50) DEFAULT NULL,
+                PRIMARY KEY (`ID`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+            """)
+            logging.info('tabla clientes_banco creada con exito')
+            print('tabla clientes_banco creada con exito')
+        except Error as e:
+            logging.error(f'error al crear tabla {e}')
+            print(f'error al crear tabla {e}')
+    
+
+    
     

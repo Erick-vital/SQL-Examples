@@ -23,9 +23,8 @@ def cli():
 
 @cli.command()
 def initdb():
-    logging.info('iniciando la db')
-    c.iniciar_conexion()
-    click.echo('conexion iniciada')
+    logging.info('Crear tabla')
+    c.crear_tabla()
 
 @cli.command()
 def dropdb():
@@ -35,11 +34,11 @@ def dropdb():
 @cli.command()
 def consultaRegistros():
 
-    cursor = c.conexion.cursor()
+    #cursor = c.conexion.cursor()
     query = "select * from BANCO.ClienteBanco"
-    cursor.execute(query)
+    #cursor.execute(query)
 
-    records = cursor.fetchall()
+    records = c.query(query)
     
     print("Total number of rows in table: ", c.cursor.rowcount)
     for row in records:
@@ -52,11 +51,11 @@ def consultaRegistros():
 @cli.command()
 def ordenarPorNombre():
 
-    cursor = c.conexion.cursor()
+    # cursor = c.conexion.cursor()
     query = "select * from BANCO.ClienteBanco order by first_name"
-    cursor.execute(query)
+    # cursor.execute(query)
 
-    records = cursor.fetchall()
+    records = c.query(query)
     
     print("Ordena los nombres de forma alfabetica")
     for row in records:
@@ -72,9 +71,7 @@ def insertarDatosDummy():
         cursor.callproc('insertar_cliente', args=(y[i]['first_name'], y[i]['last_name'], y[i]['email'], y[i]['gender'], y[i]['ip_address']))
         c.conexion.commit()
         logging.info("datos insertados")
-        print(y[i]['first_name'])
-    print(y[0]['first_name'])
-    print(y)
+    click.echo('datos dummy insertados')
 
 if __name__ == '__main__':
     cli()
