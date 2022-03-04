@@ -1,4 +1,4 @@
-
+from datatest import validate
 from pydoc import cli
 import click
 import logging
@@ -38,7 +38,24 @@ def insertartDatosDummy():
     cursor = c.conexion.cursor()
     
     for i in range(0, len(y) - 1):
-        cursor.callproc('insertar_cliente', args=(y[i]['first_name'], y[i]['last_name'], y[i]['email'], y[i]['gender'], y[i]['ip_address']))
+        # validaciones
+        """
+            todos los datos tienen que cumplir con el tipo de dato
+            esperado antes de continuar con el procedimiento y si este
+            no cumple se lanzara una excepcion
+        """
+        validate(y[i]['first_name'], str)
+        validate(y[i]['last_name'], str)
+        validate(y[i]['email'], str)
+        validate(y[i]['gender'], str)
+        validate(y[i]['ip_address'], str)
+        cursor.callproc('insertar_cliente', args=(
+            y[i]['first_name'],
+            y[i]['last_name'], 
+            y[i]['email'], 
+            y[i]['gender'], 
+            y[i]['ip_address']
+            ))
         c.conexion.commit()
         logging.info("datos insertados")
     click.echo('datos dummy insertados')
