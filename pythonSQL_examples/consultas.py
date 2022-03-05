@@ -1,4 +1,3 @@
-from datatest import validate
 from pydoc import cli
 import click
 import logging
@@ -6,8 +5,10 @@ from logConf import *
 from conexion import ConexionDB
 import requests
 import json
+from validaciones import Validaciones
 
 c = ConexionDB() 
+v = Validaciones()
 
 @click.command()
 @click.option('--tabla', is_flag=True, help='crear tabla')
@@ -40,15 +41,40 @@ def insertartDatosDummy():
     for i in range(0, len(y) - 1):
         # validaciones
         """
-            todos los datos tienen que cumplir con el tipo de dato
+            todos los datos tienen que cumplir con las validaciones  
             esperado antes de continuar con el procedimiento y si este
             no cumple se lanzara una excepcion
         """
-        validate(y[i]['first_name'], str)
-        validate(y[i]['last_name'], str)
-        validate(y[i]['email'], str)
-        validate(y[i]['gender'], str)
-        validate(y[i]['ip_address'], str)
+        if v.is_name(y[i]['first_name']):
+            pass
+        else:
+            logging.error('nombre no es correcto')
+            click.echo('nombre no es correcto')
+            break
+        if v.is_name(y[i]['last_name']):
+            pass
+        else:
+            logging.error('apellido no es correcto')
+            click.echo('apellido no es correcto')
+            break
+        if v.is_email(y[i]['email']):
+            pass
+        else:
+            logging.error('email no es correcto')
+            click.echo('email no es correcto')
+            break
+        if v.is_gender(y[i]['gender']):
+            pass
+        else:
+            logging.error('genero no es correcto')
+            click.echo('genero no es correcto')
+            break
+        if v.is_ip(y[i]['ip_address']):
+            pass
+        else:
+            logging.error('ip no es correcta')
+            click.echo('ip no es correcta')
+            break
         cursor.callproc('insertar_cliente', args=(
             y[i]['first_name'],
             y[i]['last_name'], 
