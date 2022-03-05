@@ -13,7 +13,7 @@ c = ConexionDB()
 @click.option('--filename', type=click.Path(exists=True), help='ruta del archivo')
 def file(filename):
     #hojas para manipular el excel
-    workbook = load_workbook(filename='./MOCK_DATA.xlsx')
+    workbook = load_workbook(filename=filename)
     sheet = workbook.active
     
     # cursor
