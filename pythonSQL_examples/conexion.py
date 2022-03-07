@@ -67,6 +67,31 @@ class ConexionDB:
             logging.error(f'error al crear tabla {e}')
             print(f'error al crear tabla {e}')
     
+    def drop_tabla(self):
+        try:
+            self.cursor.execute("""
+            DROP TABLE IF EXISTS ClienteBanco;;
+            """)
+            logging.info('tabla eliminada correctamente')
+            print('tabla eliminada correctamente')
+        except Error as e:
+            logging.error(f'error al remover tabla {e}')
+            print(f'error al remover tabla {e}')
+    
+    def crear_procedimiento(self):
+        try:
+            self.cursor.execute("""
+            CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_cliente`(nombre varchar(50), apellido varchar(50), correo varchar(50), genero varchar(50), ip varchar(50))
+            BEGIN
+                insert into ClienteBanco(first_name, last_name, email, gender, ip_address) values (nombre, apellido, correo, genero, ip); 
+            END
+            """)
+            logging.info('procedimiento creado')
+            print('procedimiento creado')
+        except Error as e:
+            logging.error(f'error al crear procedimiento {e}')
+            print(f'error al crear procedimiento {e}')
+    
 
     
     

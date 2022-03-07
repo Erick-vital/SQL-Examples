@@ -15,8 +15,10 @@ v = Validaciones()
 @click.option('--insertar', is_flag=True, help='inserta registros a la tabla')
 @click.option('--order', is_flag=True, help='ordena los nombres alfabeticamente')
 @click.option('--registros', is_flag=True, help='muestra los registros de la tabla')
+@click.option('--drop', is_flag=True, help='borra la tabla')
+@click.option('--procedimiento', is_flag=True, help='crea un procedimiento almacenado')
 # @click.option('--apellido', prompt="tu apellido", help="escribe tu apellido")
-def process(tabla, insertar, order, registros):
+def process(tabla, insertar, order, registros, drop, procedimiento):
     if tabla:
         c.crear_tabla()
         print('soy la tabla')
@@ -30,6 +32,10 @@ def process(tabla, insertar, order, registros):
         ordenarPorNombre()
     elif registros:
         consultaRegistros()
+    elif drop:
+        c.drop_tabla()
+    elif procedimiento:
+        c.crear_procedimiento()
     
 
 
