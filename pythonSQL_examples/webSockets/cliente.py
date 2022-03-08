@@ -9,15 +9,14 @@ import os
 
 load_dotenv()
 
+private_key = os.getenv('p_k').encode()
+token = os.getenv('token')
 async def hello():
     url = 'ws://localhost:8765'
     async with websockets.connect(url) as websocket:
-        private_key = input('Password: ')
-        private_key = private_key.encode()
-        TOKEN = '1234'
 
         parameters = {}
-        parameters['token'] = TOKEN
+        parameters['token'] = token
         parameters['timestamp'] = str(datetime.now().isoformat())
 
         mensaje = str(parameters.items()).encode()
