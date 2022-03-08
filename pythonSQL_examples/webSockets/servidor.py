@@ -1,23 +1,23 @@
 import os
+from dotenv import load_dotenv
+import hmac
+import hashlib
 import asyncio
 from cProfile import run
 import websockets
 
+load_dotenv()
+private_key = os.getenv('p_k').encode()
+
 async def handler(websocket):
-    consulta = await websocket.recv()
-    print(f'<<< {consulta}')
+    mensaje = await websocket.recv()
+    print(f'<<< {mensaje}')
 
-    if consulta == 'consulta':
-        os.system('python3 consultas.py --order > ouputs.txt')
-        os.system('python3 consultas.py --registros >> ouputs.txt')
-        mensaje = 'el output de peticion a sido escrito en el archivo outputs.tx'
-    else:
-        mensaje = 'peticion no encontrada'
 
-    # saludo = f'hola {consulta} !'
+    sign = hmac.new(private_key, mensaje, hashlib.sha256).hexdigest()
 
-    await websocket.send(mensaje)
-    print(f'>>> {mensaje}')
+    await websocket.send(sign)
+    #print(f'>>> {sign}')
 
 async def main():
     async with websockets.serve(handler, 'localhost', 8765):
