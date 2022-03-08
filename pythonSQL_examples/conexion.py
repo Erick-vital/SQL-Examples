@@ -53,11 +53,11 @@ class ConexionDB:
             self.cursor.execute("""
             CREATE TABLE ClienteBanco (
                 `ID` int NOT NULL AUTO_INCREMENT,
-                `first_name` varchar(50) NOT NULL,
-                `last_name` varchar(50) DEFAULT NULL,
-                `email` varchar(60) DEFAULT NULL,
-                `gender` varchar(60) DEFAULT NULL,
-                `ip_address` varchar(50) DEFAULT NULL,
+                `first_name` varchar(10) NOT NULL,
+                `last_name` varchar(10) DEFAULT NULL,
+                `email` varchar(40) DEFAULT NULL,
+                `gender` varchar(10) DEFAULT NULL,
+                `ip_address` varchar(16) DEFAULT NULL,
                 PRIMARY KEY (`ID`)
             ) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
             """)
