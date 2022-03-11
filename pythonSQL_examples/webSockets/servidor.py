@@ -1,10 +1,14 @@
 import os
+import importlib
 from dotenv import load_dotenv
 import asyncio
 from cProfile import run
 import websockets
-from claseAbstracta import Consultas
 
+lib = 'Servicios'
+current = importlib.import_module(lib)
+Validacion = getattr(current, 'Validacion')
+Consultas = getattr(current, 'Consultas')
 load_dotenv()
 
 private_key = os.getenv('p_k').encode()
@@ -13,9 +17,14 @@ port = os.getenv('port')
 
 async def main(websocket, path):
     mensaje = await websocket.recv()
-    c = Consultas(mensaje)
+    v = Validacion(mensaje)
+    
+    if v.run()
+        c = Consultas(mensaje)
+        mensaje_servidor = c.run()
+    else:
+        mensaje_servidor = 'error posible corrupcion de datos'
 
-    mensaje_servidor = c.run()
 
     await websocket.send(mensaje_servidor)
 
