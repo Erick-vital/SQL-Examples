@@ -48,3 +48,14 @@ class Consultas(AbstractaSertvidor):
             mensaje_servidor = ('peligro posible corrupcion de datos')
         
         return mensaje_servidor
+    
+class Validacion(AbstractaServidor):
+    def run(self):
+        try:
+            if hmac.compare_digest(self.actual_digest, self.sign):
+                logging.info('todo correcto en el servidor')
+                return True
+        except Error as e:
+            print('peligro posible corrupcion de datos {e}')
+            logging.info('peligro posible corrupcion de datos {e}')
+            return False
