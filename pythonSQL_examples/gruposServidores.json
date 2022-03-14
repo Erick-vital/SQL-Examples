@@ -1,0 +1,24 @@
+{
+    "grupos": {
+        "desarrollo":{
+            "servidor":{
+                "ip":"localhost",
+                "puerto": "5092"
+            },
+            "servidor2":{
+                "ip":"localhost",
+                "puerto": "5060"
+            }
+        }
+    },
+    "servidores":{
+        "servidor":{
+            "ip":"localhost",
+            "puerto": "5060"
+        },
+        "servidor2":{
+            "ip":"localhost",
+            "puerto": "5060"
+        }
+    }
+}

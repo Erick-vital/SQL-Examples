@@ -1,9 +1,10 @@
+
 import os, sys
 from dotenv import load_dotenv
 import asyncio
 from cProfile import run
 import websockets
-sys.path.append('/home/tao/python/pythonSQL_ejemplos/servicios')
+sys.path.append('/home/tao/python/pythonSQL_ejemplos')
 from servicios.Validacion import Validacion
 
 load_dotenv()
@@ -14,15 +15,16 @@ port = os.getenv('port')
 
 async def main(websocket, path):
     mensaje = await websocket.recv()
-    v = Validacion(mensaje)
+    print(mensaje)
+    # v = Validacion(mensaje)
 
-    if v.run():
-        mensaje_servidor = v.validar_comando()
-    else:
-        mensaje_servidor = 'error posible corrupcion de datos'
+    # if v.run():
+    #     mensaje_servidor = v.validar_comando()
+    # else:
+    #     mensaje_servidor = 'error posible corrupcion de datos'
 
-    await websocket.send(mensaje_servidor)
+    await websocket.send(' que tal ')
 
-start_server = websockets.serve(main, host, port)
+start_server = websockets.serve(main, host, 5060)
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
