@@ -15,7 +15,9 @@ El balanceador clona el servidor que esta recibiendo la peticiones ademas distri
 el original y el clonado ambos consumen de la misma base de datos, las peticiones se distribuyen entre los servidores usando un porxy inverso
 
 ## Balanceo de Carga con traefik
-Traefik está entre Reverse Proxy y Load Balancer, es fácil de utilizar y es dinámico
+Traefik está entre Reverse Proxy y Load Balancer, es fácil de utilizar y es dinámico, primero al usar traefik creas entrypoints que en su forma mas basica
+no son mas que puertos, depues conectas a esos entrypoints, el router analiza la peticion entrante y si cumple con una series de reglas establecidas por el router
+se hace la conexion con el servicio
 
 Traefik el cual ejercerá de nuestro routing hacia los distintos “backend” que utilizaremos. Es decir, conectaremos una série de “Frontends” con “Backends” mediante puntos de acceso (rutas)
 
