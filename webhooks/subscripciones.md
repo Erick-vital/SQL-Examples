@@ -1,40 +1,23 @@
-## SUBSCRIPCION A WEBHOOK SHOPIFY
-Como crear una nueva susbcripcion
+## WEBHOOK SHOPIFY
+Como crear una nueva susbcripcion especificando um **address** y un **topic**
 
-### Argumentos
-- topic: el tipo de evento que activa el webhook
-- webhookSubscription: especifica los campos de entrada de la subscripcion
-
-### Campos de entrada (WebhookSubscriptionInput fields)
-
-- callbackurl: url donde el webhook envia el post al ocurrir el evento
-- format: el formato de como la data sera enviada
-- includefield: la lista de campos que sera incluido en el webhook
-- metafieldNamespaces: la metadata que sera incluida en la subscripcion
-- privateMetafieldNamespaces: metadata privada a ser incluida en la subscripcion
+### Body del webhook
+- address: la direccion donde recibira la notificacion
+- topic: el tipo de evento que dispara la notificacion
 
 ### Ejemplo
 ejemplo de subscripcion al webhook construido con curl    
-con el topic 'APP_UNISTALLED'
+con el topic 'orders/create'
 
 ```
-curl -X POST \
-https://your-development-store.myshopify.com/admin/api/2022-04/graphql.json \
--H 'Content-Type: application/json' \
--H 'X-Shopify-Access-Token: {access_token}' \
--d '{
-"query": "mutation webhookSubscriptionCreate($topic: WebhookSubscriptionTopic!, $webhookSubscription: WebhookSubscriptionInput!) { webhookSubscriptionCreate(topic: $topic, webhookSubscription: $webhookSubscription) { webhookSubscription { id topic format endpoint { __typename ... on WebhookHttpEndpoint { callbackUrl } } } } }",
- "variables": {
-    "topic": "APP_UNINSTALLED",
-    "webhookSubscription": {
-      "callbackUrl": "https://example.org/endpoint",
-      "format": "JSON"
-    }
-  }
-}'
+curl -d '{"webhook":{"topic":"orders/create","address":"https://example.hostname.com/","format":"json","fields":["id","note"]}}' \
+-X POST "https://your-development-store.myshopify.com/admin/api/2022-04/webhooks.json" \
+-H "X-Shopify-Access-Token: {access_token}" \
+-H "Content-Type: application/json"
+
 ```
 
-
+Material de referencia para los webhooks de shopify https://shopify.dev/api/admin-rest/2022-04/resources/webhook#post-webhooks
 
 ## SUBSCRIPCION A WEBHOOK AMAZON
 una vez creado el evento y el destino esta es la forma de crear una subscripcion a una notificacion
