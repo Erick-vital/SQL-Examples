@@ -1,9 +1,38 @@
+# WEBHOOK
+uso de webhook en shopify amazon y mercado libre
+
+### Crear una url para nuestro webhook
+en cualquiera de los casos nesecitamos una url que estara recibiendo las respuestas de nuestro webhook
+
+ejemplos usando fastapi:
+```
+from fastapi import FastAPI, Request, Response
+import http
+
+app = FastAPI()
+
+
+@app.post("/payload", status_code=http.HTTPStatus.ACCEPTED)
+async def webhook(request: Request):
+    print(request)
+    return {}
+```
+
+
 ## WEBHOOK SHOPIFY
 Como crear una nueva susbcripcion especificando um **address** y un **topic**
+
+### Crear una app de shopify
+en primer lugar nesecitamos una app de shopify que sera donde se recibiran los eventos
+que depues usaremos para enviar la notificacion
+para mas informacion sobre crear una app click [aqui](https://shopify.dev/apps/getting-started/create#step-1-create-a-new-app)
 
 ### Body del webhook
 - address: la direccion donde recibira la notificacion
 - topic: el tipo de evento que dispara la notificacion
+
+### Headers
+X-Shopify-Access-Token: esta sera la contrasena la la app que acabas de crear
 
 ### Ejemplo
 ejemplo de subscripcion al webhook construido con curl    
@@ -42,6 +71,9 @@ POST https://sellingpartnerapi-na.amazon.com/ notifications/v1/subscriptions/BRA
 }
 ```
 
+para mas informacion sobre las notificaciones visita el siguiente enlace
+https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-use-case-guide
+
 ## SUBSCRIPCION A WEBHOOK MercadoLibre
 Para comenzar a recibir notificaciones, debes realizar el login e ingresar a Mis aplicaciones, donde creaste tu aplicación por primera vez, editas detalles y especificas los topics que recibirás. Si aún no has creado tu aplicación, puedes hacerlo ahora. 
 
@@ -66,4 +98,10 @@ Para comenzar a recibir notificaciones, debes realizar el login e ingresar a Mis
 - items prices: recibirás notificaciones del item_id cada vez que el precio se crea, se actualiza o se borra.
 - public candidates: Recibirá notificaciones cada vez que un ítem sea invitado a participar en una promoción.
 - public offers: recibirás notificaciones cuando se crea o cambia de estado una oferta en un ítem.
+
+Para mas informacion sobre las notificaiones visita el siguiente enlace
+https://developers.mercadolibre.com.ar/es_ar/productos-recibe-notificaciones
+
+## DIAGRAMA DE CREACION Y ACTIVACION DEL WEEBHOOK
+![imagen](https://user-images.githubusercontent.com/71853038/187945007-fc4a0353-fa3b-4c43-8f80-1df13ce02197.png)
 
